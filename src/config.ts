@@ -1,0 +1,3 @@
+export const VIDEO_TITLE_LENGTH = 100
+export const VIDEO_DESCRIPTION_LENGTH = 5000
+export const NEXT_POPUP_DELAY = 500

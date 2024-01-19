@@ -1,0 +1,78 @@
+// @font-face {
+//   font-family: "Rubik";
+//   src: url("/fonts/Rubik-VariableFont.woff2") format("woff2-variations"),
+//     url("/fonts/Rubik-VariableFont.woff2") format("woff2");
+//   font-weight: 1 1000;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+@font-face {
+  font-family: 'Jost';
+  src: url('/fonts/jost.woff2') format('woff2');
+  font-weight: 1 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+// @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Jost', sans-serif;
+}
+
+.tap,
+.tap99,
+.tap97,
+.tap95 {
+  transition-duration: 100ms;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.tap {
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.tap99 {
+  &:active {
+    scale: 0.99;
+  }
+}
+
+.tap97 {
+  &:active {
+    scale: 0.97;
+  }
+}
+
+.tap95 {
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* width */
+.liveChat::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.liveChat::-webkit-scrollbar-track {
+  background: #ffffff10;
+  border-radius: 10px;
+}
+
+/* Handle */
+.liveChat::-webkit-scrollbar-thumb {
+  background: #ffffff30;
+  border-radius: 10px;
+}
