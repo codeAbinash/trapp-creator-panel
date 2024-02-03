@@ -196,36 +196,77 @@ function CopyButton({ text }: { text: string }) {
   )
 }
 
-interface MessageT {
-  created_at: string
+interface NormalMessage {
   id: number
+  video_id: number
+  user_id: number
+  type: string
   name: string
-  message: string
   avatar: string
-  type: 'creator' | 'user'
+  message: string
+  message_type: 'plain_text'
+  sticker: null
+  created_at: string
+  updated_at: string
 }
 
-function Message({ message }: { message: MessageT }) {
-  return (
-    <div className='flex items-center gap-4 pr-5'>
-      <img src={message.avatar} alt='' className='h-8 w-8 rounded-full ' />
-      <div className='flex flex-col gap-1'>
-        <div className='flex items-center gap-2'>
-          {message.type === 'creator' ? (
-            <span className='flex items-center justify-center gap-1 text-xs font-semibold text-green-500'>
+interface StickerMessage {
+  id: number
+  video_id: number
+  user_id: number
+  type: string
+  name: string
+  avatar: string
+  message: null
+  message_type: 'stickers'
+  sticker: string
+  created_at: string
+  updated_at: string
+}
+function Message({ message }: { message: NormalMessage | StickerMessage }) {
+  if (message.message_type === 'stickers')
+    return (
+      <div className='flex gap-4 pl-5 pr-5'>
+        <img src={message.avatar} alt='' className='mt-2 h-8 w-8 rounded-full' />
+        <div className='flex w-full flex-col py-3'>
+          <span className='text-xs font-semibold'>
+            {message.name}
+            <MessageTime message={message} />
+          </span>
+          <img src={message.sticker} alt='' className='mt-3 h-20 w-20' />
+        </div>
+        <div className='text-sm'>{message.message}</div>
+      </div>
+    )
+
+  if (message.type === 'creator')
+    return (
+      <div className='flex items-center gap-4 pl-5 pr-5'>
+        <img src={message.avatar} alt='' className='h-8 w-8 rounded-full' />
+        <div className='flex flex-col gap-1'>
+          <div>
+            <span className='flex items-center gap-1 text-xs font-semibold text-green-500'>
               Creator
               <BadgeCheckIcon height={13} width={13} className='mr-1 inline-block' strokeWidth={2.5} />
+              <MessageTime message={message} />
             </span>
-          ) : (
-            <span className='text-xs font-semibold'>{message.name}</span>
-          )}
-          <span className='text-xs opacity-60'>
-            {new Date(message.created_at).toLocaleTimeString('en-US', {
-              hour: 'numeric',
-              hour12: true,
-              minute: 'numeric',
-            })}
-          </span>
+          </div>
+          <div className='text-sm'>{message.message}</div>
+        </div>
+      </div>
+    )
+
+  return (
+    <div className='flex items-center gap-4 pl-5 pr-5'>
+      <img src={message.avatar} alt='' className='h-8 w-8 rounded-full' />
+      <div className='flex flex-col gap-1'>
+        <div className='flex items-center gap-2'>
+          <div>
+            <span className='text-xs font-semibold'>
+              {message.name}
+              <MessageTime message={message} />
+            </span>
+          </div>
         </div>
         <div className='text-sm'>{message.message}</div>
       </div>
@@ -233,10 +274,22 @@ function Message({ message }: { message: MessageT }) {
   )
 }
 
+function MessageTime({ message }: { message: NormalMessage | StickerMessage }) {
+  return (
+    <span className='pl-2 text-xs font-normal opacity-60'>
+      {new Date(message.created_at).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        hour12: true,
+        minute: 'numeric',
+      })}
+    </span>
+  )
+}
+
 const MAX_MESSAGES_SIZE = 200
 
 function LiveChat({ video_id }: { video_id: number }) {
-  const [messages, setMessages] = useState<MessageT[]>([])
+  const [messages, setMessages] = useState<(NormalMessage | StickerMessage)[]>([])
   const [isSending, setIsSending] = useState(false)
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
   const inputRef = useRef<null | HTMLInputElement>(null)
@@ -269,11 +322,12 @@ function LiveChat({ video_id }: { video_id: number }) {
 
     const channel = pusher.subscribe(video_id.toString())
     channel.bind('MessageSent', function (data: any) {
-      console.log(data.message)
       setMessages((prev) => [...prev, data.message].slice(-MAX_MESSAGES_SIZE))
     })
     channel.bind('CreMessageSent', function (data: any) {
-      console.log(data.message)
+      setMessages((prev) => [...prev, data.message].slice(-MAX_MESSAGES_SIZE))
+    })
+    channel.bind('StickerSent', function (data: any) {
       setMessages((prev) => [...prev, data.message].slice(-MAX_MESSAGES_SIZE))
     })
   }, [])
@@ -302,7 +356,7 @@ function LiveChat({ video_id }: { video_id: number }) {
   return (
     <div>
       <div className='flex flex-col'>
-        <div className='liveChat relative flex h-[67dvh] flex-col gap-4 overflow-auto p-5 pr-2' ref={messageBoxRef}>
+        <div className='liveChat relative flex h-[67dvh] flex-col gap-4 overflow-auto pr-2' ref={messageBoxRef}>
           {messages.map((message, index) => (
             <Message message={message} key={index} />
           ))}
