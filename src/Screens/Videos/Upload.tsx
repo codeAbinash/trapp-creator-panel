@@ -109,7 +109,7 @@ export default function Upload() {
 
     if (!cat_id) return newPopup({ title: 'Invalid Category', subTitle: 'Please select a category' })
 
-    if (!pl_id) return newPopup({ title: 'Invalid Playlist', subTitle: 'Please select a playlist' })
+    // if (!pl_id) return newPopup({ title: 'Invalid Playlist', subTitle: 'Please select a playlist' })
 
     upload(
       videFile.current!.files![0],
