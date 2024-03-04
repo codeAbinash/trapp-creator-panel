@@ -107,7 +107,7 @@ export default function Upload() {
       return newPopup({ title: 'Invalid Description', subTitle: `Description can't be more than ${VIDEO_DESCRIPTION_LENGTH} characters long` })
     if (!thumbnailFile.current?.files?.[0]) return newPopup({ title: 'Invalid Thumbnail', subTitle: 'Please select a thumbnail' })
 
-    if (!cat_id) return newPopup({ title: 'Invalid Category', subTitle: 'Please select a category' })
+    // if (!cat_id) return newPopup({ title: 'Invalid Category', subTitle: 'Please select a category' })
 
     // if (!pl_id) return newPopup({ title: 'Invalid Playlist', subTitle: 'Please select a playlist' })
 
