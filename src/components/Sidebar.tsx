@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from './ui/button'
 
-import { AreaChart, BarChartBigIcon, LogOut, LucideIcon, RadioIcon, UploadIcon, VideoIcon, YoutubeIcon } from 'lucide-react'
+import { AreaChart, BarChartBigIcon, LogOut, LucideIcon, RadioIcon, UploadIcon, VideoIcon, ListVideoIcon } from 'lucide-react'
 
 import store from '@/Redux/store'
 import {
@@ -18,8 +18,8 @@ import {
 } from '@/components/ui/alert-dialog'
 import { DEFAULT_PP } from '@/constants'
 import ls from '@/lib/ls'
-import { CreatorProfile } from '@/lib/types'
 import transitions from '@/lib/transition'
+import { CreatorProfile } from '@/lib/types'
 
 export function LogoutPopupButton() {
   const navigate = useNavigate()
@@ -100,6 +100,7 @@ function Options({ path, navigate }: { path: string; navigate: NavigateFunction 
       <OptionItem navigate={navigate} path='/videos' currentPath={path} name='Videos' SideIcon={VideoIcon} />
       <OptionItem navigate={navigate} path='/videos/upload' currentPath={path} name='Upload Video' SideIcon={UploadIcon} />
       <OptionItem navigate={navigate} path='/videos/create_live' currentPath={path} name='Go Live' SideIcon={RadioIcon} />
+      <OptionItem navigate={navigate} path='/videos/playlist' currentPath={path} name='Playlist' SideIcon={ListVideoIcon} />
     </div>
   )
 }

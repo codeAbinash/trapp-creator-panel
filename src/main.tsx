@@ -14,6 +14,7 @@ import Login from './Screens/Login.tsx'
 import PopupAlert from './components/PopupAlert.tsx'
 import { PopupAlertContextProvider } from './context/PopupAlertContext.tsx'
 import Live from './Screens/Live/Live.tsx'
+import Playlist from './Screens/Playlist.tsx'
 
 const Videos = lazyWithPreload(() => import('./Screens/Videos/Videos.tsx'))
 const EditProfile = lazyWithPreload(() => import('./Screens/EditProfile/EditProfile.tsx'))
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: '/videos/create_live',
         element: <CreateLive />,
+      },
+      {
+        path: '/videos/playlist',
+        element: <Playlist />,
       },
       {
         path: '/videos/live',

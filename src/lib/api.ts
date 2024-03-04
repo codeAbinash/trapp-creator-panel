@@ -75,6 +75,12 @@ const API = {
     delete: `${API_URL}/video/delete`,
     edit: `${API_URL}/video/edit`,
   },
+  playlist: {
+    create: `${API_URL}/playlist/create`,
+    fetch: `${API_URL}/playlist/fetch`,
+    delete: `${API_URL}/playlist/delete`,
+    edit: `${API_URL}/playlist/edit`,
+  },
   live: {
     create: `${API_URL}/video/live/create`,
     fetch: `${API_URL}/video/live/fetch`,
@@ -90,6 +96,61 @@ const API = {
 export default API
 
 // All API calls
+
+export async function create_playlist_f(body: FormData): Promise<apiResponse> {
+  try {
+    const headers = authorizedHeader(formDataHeaders)
+    const res = await fetch(API.playlist.create, {
+      method: 'POST',
+      headers,
+      body,
+    })
+    return await returnResponse(res)
+  } catch (err) {
+    return catchError(err)
+  }
+}
+
+export async function fetch_playlist_f(): Promise<apiResponse> {
+  try {
+    const headers = authorizedHeader(defaultHeaders)
+    const res = await fetch(API.playlist.fetch, {
+      method: 'POST',
+      headers,
+    })
+    return await returnResponse(res)
+  } catch (err) {
+    return catchError(err)
+  }
+}
+
+export async function delete_playlist_f(id: number): Promise<apiResponse> {
+  try {
+    const headers = authorizedHeader(defaultHeaders)
+    const res = await fetch(API.playlist.delete, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ id }),
+    })
+    return await returnResponse(res)
+  } catch (err) {
+    return catchError(err)
+  }
+}
+
+export async function edit_playlist_f(body: FormData): Promise<apiResponse> {
+  try {
+    const headers = authorizedHeader(formDataHeaders)
+    const res = await fetch(API.playlist.edit, {
+      method: 'POST',
+      headers,
+      body,
+    })
+    return await returnResponse(res)
+  } catch (err) {
+    return catchError(err)
+  }
+}
 
 export async function fetch_live_chat_f(video_id: string): Promise<apiResponse> {
   try {
