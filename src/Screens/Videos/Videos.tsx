@@ -102,6 +102,8 @@ export interface VideoData {
   created_at: string
   updated_at: string
   details: JSX.Element
+  playlist_id: string
+  cat_id: string
 }
 const columns: ColumnDef<VideoData>[] = [
   {
@@ -147,13 +149,25 @@ const columns: ColumnDef<VideoData>[] = [
     cell: ({ row }) => <div className='font-[450]'>{row.getValue('id')}</div>,
   },
   {
+    accessorKey: 'playlist_id',
+    header: 'Playlist ID',
+    cell: ({ row }) => <div className='font-[450]'>{row.getValue('playlist_id')}</div>,
+  },
+  {
+    accessorKey: 'cat_id',
+    header: 'Category ID',
+    cell: ({ row }) => <div className='font-[450]'>{row.getValue('cat_id')}</div>,
+  },
+  {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const [deletePopup, setDeletePopup] = useState(false)
-      const [banPopup, setBanPopup] = useState(false)
-      const [unbanPopup, setUnbanPopup] = useState(false)
+      // const [deletePopup, setDeletePopup] = useState(false)
+      // const [banPopup, setBanPopup] = useState(false)
+      // const [unbanPopup, setUnbanPopup] = useState(false)
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const { newPopup } = usePopupAlertContext()
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const navigate = useNavigate()
 
       return (
@@ -186,6 +200,9 @@ const columns: ColumnDef<VideoData>[] = [
                     title: row.getValue('title'),
                     description: row.getValue('description'),
                     thumbnail: row.getValue('thumbnail'),
+                    privacy: row.getValue('privacy'),
+                    playlist_id: row.getValue('playlist_id'),
+                    cat_id: row.getValue('cat_id'),
                   },
                 })
               }}
@@ -342,6 +359,8 @@ export interface ServerResponse {
   views: number
   likes: number
   dislikes: number
+  playlist_id: string
+  cat_id: string
 }
 
 function generateOrganizedData(data: ServerResponse[]) {
@@ -357,6 +376,8 @@ function generateOrganizedData(data: ServerResponse[]) {
       video_type: user.video_type,
       created_at: user.created_at,
       updated_at: user.updated_at,
+      playlist_id: user.playlist_id,
+      cat_id: user.cat_id,
       details: (
         <div className='flex gap-5'>
           <div className='flex flex-col items-center justify-center'>

@@ -15,3 +15,20 @@ export type PaginationT = {
     active: boolean
   }[]
 }
+
+export interface Category {
+  id: number
+  image: string
+  title: string
+  created_at: string
+  updated_at: string
+}
+
+export interface Playlist {
+  id: number
+  thumbnail: string
+  name: string
+  playlist_name: string
+  created_at: string
+  updated_at: string
+}

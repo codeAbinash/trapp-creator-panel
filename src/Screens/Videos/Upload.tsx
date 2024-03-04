@@ -1,18 +1,17 @@
 import { Button } from '@/components/ui/button'
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { VIDEO_DESCRIPTION_LENGTH, VIDEO_TITLE_LENGTH } from '@/config'
 import { PopupAlertType, usePopupAlertContext } from '@/context/PopupAlertContext'
 import Chunk from '@/lib/Chunk'
-import API, { get_cat_list_f } from '@/lib/api'
-import { userMessage } from '@/lib/types'
+import API, { fetch_playlist_f, get_cat_list_f } from '@/lib/api'
 import { picFileValidation, videoFileValidation } from '@/lib/utils'
 import { CheckCircle, Image, Lock, UploadIcon, Video } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NavigateFunction, useNavigate } from 'react-router-dom'
+import { Category, Playlist } from './types'
 
 const successFn = (setIsUploading: React.Dispatch<React.SetStateAction<boolean>>, newPopup: (p: PopupAlertType) => void, nav: NavigateFunction) => {
   setIsUploading(false)
@@ -57,6 +56,7 @@ const upload = (
   privacy: 'public' | 'private' = 'public',
   thumbnail: File,
   cat_id: string = '',
+  playlist_id: string = '',
 ) => {
   setIsUploading(true)
   if (file) {
@@ -68,6 +68,7 @@ const upload = (
       description,
       privacy,
       cat_id,
+      playlist_id,
       successFn: () => successFn(setIsUploading, newPopup, nav),
       errorFn: () => errorFn(setIsUploading, newPopup),
       updateProgressFn: (percent: number) => uploadProgressFn(percent, setPercent),
@@ -78,14 +79,6 @@ const upload = (
   } else {
     console.warn('Please select a file.')
   }
-}
-
-export interface Category {
-  id: number
-  image: string
-  title: string
-  created_at: string
-  updated_at: string
 }
 
 export default function Upload() {
@@ -99,6 +92,8 @@ export default function Upload() {
   const [privacy, setPrivacy] = useState<'public' | 'private'>('public')
   const [cat_id, setCat_id] = useState('')
   const [categories, setCategories] = useState<Category[] | null>(null)
+  const [pl_id, setPl_id] = useState('')
+  const [playlists, setPlaylists] = useState<Playlist[] | null>(null)
 
   const { newPopup } = usePopupAlertContext()
   const navigate = useNavigate()
@@ -114,6 +109,8 @@ export default function Upload() {
 
     if (!cat_id) return newPopup({ title: 'Invalid Category', subTitle: 'Please select a category' })
 
+    if (!pl_id) return newPopup({ title: 'Invalid Playlist', subTitle: 'Please select a playlist' })
+
     upload(
       videFile.current!.files![0],
       setIsUploading,
@@ -125,6 +122,7 @@ export default function Upload() {
       privacy,
       thumbnailFile.current!.files![0],
       cat_id,
+      pl_id,
     )
   }
 
@@ -134,8 +132,15 @@ export default function Upload() {
     setCategories(res.data.data)
   }
 
+  async function loadPlaylists() {
+    const res = await fetch_playlist_f()
+    console.log(res.data)
+    setPlaylists(res.data.data)
+  }
+
   useEffect(() => {
     loadCategories()
+    loadPlaylists()
   }, [])
 
   return (
@@ -211,19 +216,40 @@ export default function Upload() {
           </CardHeader>
           <CardContent className='space-y-2'>
             <div className='space-y-2'>
-              <Label htmlFor='privacy'>Categories</Label>
+              <Label htmlFor='category'>Categories</Label>
               <Select value={cat_id} disabled={isUploading} onValueChange={(e) => setCat_id(e)}>
                 <SelectTrigger className='halka-border w-full'>
-                  <SelectValue placeholder={categories == null ? 'Loading...' : 'Select Category'} />
+                  <SelectValue placeholder={categories == null ? 'Loading Categories...' : 'Select Category'} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>{categories == null ? 'Loading...' : 'Select Category'}</SelectLabel>
+                    <SelectLabel>{categories == null ? 'Loading Categories...' : 'Select Category'}</SelectLabel>
                     {categories?.map((cat) => (
                       <SelectItem key={cat.id} value={cat.id.toString()}>
                         <div className='flex gap-3'>
                           <img src={cat.image} alt={cat.title} className='h-6 w-6 rounded-full' />
                           {cat.title}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className='space-y-2'>
+              <Label htmlFor='playlist'>Playlist</Label>
+              <Select value={pl_id} disabled={isUploading} onValueChange={(e) => setPl_id(e)}>
+                <SelectTrigger className='halka-border w-full'>
+                  <SelectValue placeholder={playlists == null ? 'Loading Playlists...' : 'Select Playlist'} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>{playlists == null ? 'Loading Playlists..' : 'Select Category'}</SelectLabel>
+                    {playlists?.map((playlist) => (
+                      <SelectItem key={playlist.id} value={playlist.id.toString()}>
+                        <div className='flex gap-3'>
+                          <img src={playlist.thumbnail} alt={playlist.playlist_name} className='h-6 w-6 rounded-full' />
+                          {playlist.playlist_name}
                         </div>
                       </SelectItem>
                     ))}

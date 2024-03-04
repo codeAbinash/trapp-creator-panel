@@ -10,6 +10,7 @@ class Chunk {
   file: File = {} as File
   thumbnail: File = {} as File
   cat_id: string = ''
+  playlist_id: string = ''
   identity: string = this.generateRandomString()
   title: string = ''
   description: string = ''
@@ -27,6 +28,7 @@ class Chunk {
     size: number
     url: string
     cat_id: string
+    playlist_id: string
     successFn: () => void
     errorFn: () => void
     updateProgressFn: (progress: number) => void
@@ -38,6 +40,7 @@ class Chunk {
     this.description = props.description
     this.privacy = props.privacy
     this.cat_id = props.cat_id
+    this.playlist_id = props.playlist_id
     this.successFn = props.successFn
     this.errorFn = props.errorFn
     this.updateProgressFn = props.updateProgressFn
@@ -84,6 +87,7 @@ class Chunk {
       data.append('description', this.description)
       data.append('privacy', this.privacy)
       data.append('cat_id', this.cat_id)
+      data.append('playlist_id', this.playlist_id)
     }
     axios
       .post(this.url, data, {
