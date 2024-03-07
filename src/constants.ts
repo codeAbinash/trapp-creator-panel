@@ -12,4 +12,4 @@ export const app = {
   secret: 'hellothisisocdexindia',
 }
 
-export const DEFAULT_PP = 'https://trappmartialarts.com/storage/users/profiles/Uv5GaHWh3aQ3fe0j9Z30TDCab8NQd06Nq3MW9r3w.jpg'
+export const DEFAULT_PP = '/AppIcons/t-pp.png' // Default Profile Picture when user has not uploaded any picture

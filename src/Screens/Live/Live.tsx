@@ -7,6 +7,7 @@ import Pusher from 'pusher-js'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import VideoPlayer from './VideoPlayer'
+import { DEFAULT_PP } from '@/constants'
 interface LiveVideo {
   title: string
   description: string
@@ -258,7 +259,7 @@ function Message({ message }: { message: NormalMessage | StickerMessage }) {
 
   return (
     <div className='flex items-center gap-4 pl-5 pr-5'>
-      <img src={message.avatar} alt='' className='h-8 w-8 rounded-full' />
+      <img src={message.avatar || DEFAULT_PP} alt='' className='h-8 w-8 rounded-full' />
       <div className='flex flex-col gap-1'>
         <div className='flex items-center gap-2'>
           <div>
