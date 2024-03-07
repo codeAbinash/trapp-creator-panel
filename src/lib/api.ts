@@ -49,7 +49,8 @@ async function returnResponse(res: any): Promise<apiResponse> {
   if (data.status === true) return { status: true, message: data.message, data: data }
   else if (data.message === 'Unauthenticated.') {
     ls.clear()
-    window.location.href = ''
+    // window.location.href = ''
+    // alert('Unauthenticated')
     return { status: false, message: data.message || 'Network Error' }
   } else if (!data.errors) return { status: false, message: data.message || 'Network Error' }
   return { status: false, message: getError(data.errors) || data.message || 'Network Error' }

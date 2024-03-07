@@ -17,7 +17,14 @@ export function TabsDemo() {
     <Tabs defaultValue='creator' className='-mt-20 w-[95%] max-w-[450px]'>
       <TabsList className='grid w-full grid-cols-2'>
         <TabsTrigger value='creator'>Creator</TabsTrigger>
-        <TabsTrigger value='admin'>Admin</TabsTrigger>
+        <div
+          className='flex w-full cursor-pointer items-center justify-center text-sm'
+          onClick={() => {
+            window.location.href = import.meta.env.VITE_ADMIN_PANEL_URL
+          }}
+        >
+          Admin
+        </div>
       </TabsList>
       <TabsContent value='creator'>
         <Creator />
