@@ -29,17 +29,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { DEFAULT_PP } from '@/constants'
 
 import { Loading } from '@/components/Loading'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Textarea } from '@/components/ui/textarea'
+import { NEXT_POPUP_DELAY } from '@/config'
 import { PopupAlertType, usePopupAlertContext } from '@/context/PopupAlertContext'
-import { getStatusColor } from '@/lib/utils'
-import { Ban, EyeIcon, LinkedinIcon, ListVideo, LucideVideo, Pencil, Plus, Search, ThumbsDown, ThumbsUp, Trash2, Upload, Video } from 'lucide-react'
+import API, { delete_video_f, get_video_list_f } from '@/lib/api'
+import transitions from '@/lib/transition'
+import { EyeIcon, Pencil, ThumbsDown, ThumbsUp, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { NavigateFunction, useNavigate } from 'react-router-dom'
 import { PaginationT, defaultPagination } from './types'
-import API, { delete_video_f, get_video_list_f } from '@/lib/api'
-import { NEXT_POPUP_DELAY } from '@/config'
-import transitions from '@/lib/transition'
 
 function getReducedString(str: string, len = 30) {
   if (!str) return str
@@ -161,6 +158,7 @@ const columns: ColumnDef<VideoData>[] = [
   {
     id: 'actions',
     enableHiding: false,
+    header: 'Action',
     cell: ({ row }) => {
       // const [deletePopup, setDeletePopup] = useState(false)
       // const [banPopup, setBanPopup] = useState(false)
@@ -220,7 +218,12 @@ const columns: ColumnDef<VideoData>[] = [
 export default function Creators() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    playlist_id: false,
+    cat_id: false,
+    id: false,
+    
+  })
   const [rowSelection, setRowSelection] = useState({})
   const [videos, setVideos] = useState<VideoData[] | null>(null)
   const [pagination, setPagination] = useState<PaginationT>(defaultPagination)

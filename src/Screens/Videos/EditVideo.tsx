@@ -183,7 +183,7 @@ export default function EditVideo() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>{playlists == null ? 'Loading Playlists..' : 'Select Category'}</SelectLabel>
+                    <SelectLabel>{playlists == null ? 'Loading Playlists..' : 'Select Playlist'}</SelectLabel>
                     {playlists?.map((playlist) => (
                       <SelectItem key={playlist.id} value={playlist.id.toString()}>
                         <div className='flex gap-3'>

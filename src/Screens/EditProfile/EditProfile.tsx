@@ -15,6 +15,7 @@ import { CreatorProfile, userMessage } from '@/lib/types'
 import { delayFn, picFileValidation } from '@/lib/utils'
 import { Pencil } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { MB } from '@/lib/constants'
 
 function ProfilePicture({
   imageUrl,
@@ -130,7 +131,7 @@ export default function EditProfile() {
     if (pass1) body.password = pass1.trim()
 
     if (profilePicture !== creatorProfile?.channel_logo) {
-      const ppValidation = picFileValidation(pp.current!.files![0])
+      const ppValidation = picFileValidation(pp.current!.files![0], 2 * MB, '2MB')
       if (ppValidation.error) {
         newPopup({ title: 'Invalid File', subTitle: ppValidation.message })
         setIsUpdating(false)
@@ -140,7 +141,7 @@ export default function EditProfile() {
     }
 
     if (bannerPicture !== creatorProfile?.channel_banner) {
-      const bannerValidation = picFileValidation(banner.current!.files![0])
+      const bannerValidation = picFileValidation(banner.current!.files![0], 2 * MB, '2MB')
       if (bannerValidation.error) {
         newPopup({ title: 'Invalid File', subTitle: bannerValidation.message })
         setIsUpdating(false)
