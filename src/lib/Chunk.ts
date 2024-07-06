@@ -93,6 +93,10 @@ class Chunk {
       .post(this.url, data, {
         headers: {
           'Allow-Access-Control-Origin': '*', // CORS
+          ContentType: 'multipart/form-data',
+          Accept: 'application/json',
+          accept: 'application/json',
+          withCredentials: false,
           'x-chunk-number': this.getNumber(),
           'x-chunk-total-number': this.totalNumber,
           'x-chunk-size': this.size,
