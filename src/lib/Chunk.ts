@@ -135,11 +135,11 @@ class Chunk {
             console.warn('Validation Error', error.response.data)
           } else {
             console.log('Re-uploading the chunk...')
-            this.commit()
+           // this.commit()
           }
         } else {
           console.log('Re-uploading the chunk...')
-          this.commit()
+         // this.commit()
         }
 
         this.errorFn()
