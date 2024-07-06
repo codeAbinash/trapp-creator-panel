@@ -92,7 +92,7 @@ class Chunk {
     axios
       .post(this.url, data, {
         headers: {
-          'Allow-Access-Control-Origin': 'https://trapp-creator-panel.vercel.app', // CORS
+          'Allow-Access-Control-Origin': '*', // CORS
           ContentType: 'multipart/form-data',
           Accept: 'application/json',
           accept: 'application/json',
