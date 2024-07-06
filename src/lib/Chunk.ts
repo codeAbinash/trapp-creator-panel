@@ -92,11 +92,11 @@ class Chunk {
     axios
       .post(this.url, data, {
         headers: {
-          'Allow-Access-Control-Origin': '*', // CORS
+          'Allow-Access-Control-Origin': 'https://trapp-creator-panel.vercel.app', // CORS
           ContentType: 'multipart/form-data',
           Accept: 'application/json',
           accept: 'application/json',
-          withCredentials: false,
+          withCredentials: true,
           'x-chunk-number': this.getNumber(),
           'x-chunk-total-number': this.totalNumber,
           'x-chunk-size': this.size,
@@ -135,11 +135,11 @@ class Chunk {
             console.warn('Validation Error', error.response.data)
           } else {
             console.log('Re-uploading the chunk...')
-           // this.commit()
+            this.commit()
           }
         } else {
           console.log('Re-uploading the chunk...')
-         // this.commit()
+          this.commit()
         }
 
         this.errorFn()
