@@ -92,6 +92,7 @@ class Chunk {
     axios
       .post(this.url, data, {
         headers: {
+          'Allow-Access-Control-Origin': '*', // CORS
           'x-chunk-number': this.getNumber(),
           'x-chunk-total-number': this.totalNumber,
           'x-chunk-size': this.size,
