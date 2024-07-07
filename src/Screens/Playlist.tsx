@@ -25,7 +25,7 @@ export default function Categories() {
 
   return (
     <div>
-      <p className='mb-5 text-2xl font-bold'>Categories</p>
+      <p className='mb-5 text-2xl font-bold'>Playlist</p>
       <div className='mt-5 flex w-full flex-wrap gap-5 xl:grid-cols-2'>
         <AddNewPlaylist loadAllCategories={loadAllCategories} />
         {categories == null ? (
