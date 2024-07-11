@@ -92,7 +92,7 @@ export default function EditProfile() {
   const pp = useRef<HTMLInputElement>(null)
   const [profilePicture, setProfilePicture] = useState(creatorProfile?.channel_logo || '')
   const banner = useRef<HTMLInputElement>(null)
-  const [bannerPicture, setBannerPicture] = useState(creatorProfile?.channel_banner || '/images/banner.avif')
+  const [bannerPicture, setBannerPicture] = useState(creatorProfile?.channel_banner || '/images/background.jpg')
 
   const onProfilePicChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
