@@ -100,7 +100,7 @@ class Chunk {
           'x-chunk-number': this.getNumber(),
           'x-chunk-total-number': this.totalNumber,
           'x-chunk-size': this.size,
-          'x-file-name': this.file.name,
+          'x-file-name': encodeURI(this.file.name),
           'x-file-size': this.file.size,
           'x-file-identity': this.identity,
           Authorization: `Bearer ${ls.get('token')}`,
