@@ -7,7 +7,7 @@ import transitions from '@/lib/transition'
 import { picFileValidation } from '@/lib/utils'
 import { CheckIcon, ImageIcon, ImagePlus, Trash2Icon } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Playlist } from './Videos/types'
+import { type Playlist } from './Videos/types'
 
 export default function Categories() {
   const [categories, setCategories] = useState<Playlist[] | null>(null)
