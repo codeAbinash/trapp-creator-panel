@@ -12,20 +12,20 @@ export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const navigate = useNavigate()
 
-  const loadProfile = useCallback(async () => {
-    const res = await get_profile_f()
-    if (!res.status) return
-    const profile = res?.data.data as CreatorProfile
-    store.dispatch(setProfile(profile))
-    setProfileInfoLs(profile)
-  }, [])
+  // const loadProfile = useCallback(async () => {
+  //   const res = await get_profile_f()
+  //   if (!res.status) return
+  //   const profile = res?.data.data as CreatorProfile
+  //   store.dispatch(setProfile(profile))
+  //   setProfileInfoLs(profile)
+  // }, [])
 
-  useEffect(() => {
-    loadProfile()
-  }, [loadProfile])
-  useEffect(() => {
-    if (!ls.get('token')) navigate('/login')
-  })
+  // useEffect(() => {
+  //   loadProfile()
+  // }, [loadProfile])
+  // useEffect(() => {
+  //   if (!ls.get('token')) navigate('/login')
+  // })
   return (
     <div className='gradient'>
       <Sidebar show={isSidebarOpen} setShow={setIsSidebarOpen} />

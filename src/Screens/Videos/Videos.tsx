@@ -221,6 +221,359 @@ const columns: ColumnDef<VideoData>[] = [
   },
 ]
 
+const sampleData: VideoData[] = [
+  {
+    id: 1,
+    creator_id: 'creator_1',
+    title: 'Sample Video 1',
+    description: 'This is a sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/300/200',
+    video_loc: 'sample_video_1.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-01T00:00:00Z',
+    updated_at: '2023-01-01T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          100
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          10
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          1
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_1',
+    cat_id: 'category_1',
+    views: 100,
+    live_api_data: null,
+    video_duration: '00:10:00',
+    like_count: '10',
+    dislike_count: '1',
+  },
+  {
+    id: 2,
+    creator_id: 'creator_2',
+    title: 'Sample Video 2',
+    description: 'This is another sample video description.',
+    privacy: 'private',
+    thumbnail: 'https://picsum.photos/301/200',
+    video_loc: 'sample_video_2.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-02T00:00:00Z',
+    updated_at: '2023-01-02T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          200
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          20
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          2
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_2',
+    cat_id: 'category_2',
+    views: 200,
+    live_api_data: null,
+    video_duration: '00:20:00',
+    like_count: '20',
+    dislike_count: '2',
+  },
+  {
+    id: 3,
+    creator_id: 'creator_3',
+    title: 'Sample Video 3',
+    description: 'This is yet another sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/302/200',
+    video_loc: 'sample_video_3.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-03T00:00:00Z',
+    updated_at: '2023-01-03T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          300
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          30
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          3
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_3',
+    cat_id: 'category_3',
+    views: 300,
+    live_api_data: null,
+    video_duration: '00:30:00',
+    like_count: '30',
+    dislike_count: '3',
+  },
+  {
+    id: 4,
+    creator_id: 'creator_4',
+    title: 'Sample Video 4',
+    description: 'This is a sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/303/200',
+    video_loc: 'sample_video_4.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-04T00:00:00Z',
+    updated_at: '2023-01-04T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          400
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          40
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          4
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_4',
+    cat_id: 'category_4',
+    views: 400,
+    live_api_data: null,
+    video_duration: '00:40:00',
+    like_count: '40',
+    dislike_count: '4',
+  },
+  {
+    id: 5,
+    creator_id: 'creator_5',
+    title: 'Sample Video 5',
+    description: 'This is another sample video description.',
+    privacy: 'private',
+    thumbnail: 'https://picsum.photos/304/200',
+    video_loc: 'sample_video_5.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-05T00:00:00Z',
+    updated_at: '2023-01-05T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          500
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          50
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          5
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_5',
+    cat_id: 'category_5',
+    views: 500,
+    live_api_data: null,
+    video_duration: '00:50:00',
+    like_count: '50',
+    dislike_count: '5',
+  },
+  {
+    id: 6,
+    creator_id: 'creator_6',
+    title: 'Sample Video 6',
+    description: 'This is yet another sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/305/200',
+    video_loc: 'sample_video_6.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-06T00:00:00Z',
+    updated_at: '2023-01-06T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          600
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          60
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          6
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_6',
+    cat_id: 'category_6',
+    views: 600,
+    live_api_data: null,
+    video_duration: '01:00:00',
+    like_count: '60',
+    dislike_count: '6',
+  },
+  {
+    id: 7,
+    creator_id: 'creator_7',
+    title: 'Sample Video 7',
+    description: 'This is a sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/306/200',
+    video_loc: 'sample_video_7.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-07T00:00:00Z',
+    updated_at: '2023-01-07T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          700
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          70
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          7
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_7',
+    cat_id: 'category_7',
+    views: 700,
+    live_api_data: null,
+    video_duration: '01:10:00',
+    like_count: '70',
+    dislike_count: '7',
+  },
+  {
+    id: 8,
+    creator_id: 'creator_8',
+    title: 'Sample Video 8',
+    description: 'This is another sample video description.',
+    privacy: 'private',
+    thumbnail: 'https://picsum.photos/307/200',
+    video_loc: 'sample_video_8.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-08T00:00:00Z',
+    updated_at: '2023-01-08T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          800
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          80
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          8
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_8',
+    cat_id: 'category_8',
+    views: 800,
+    live_api_data: null,
+    video_duration: '01:20:00',
+    like_count: '80',
+    dislike_count: '8',
+  },
+  {
+    id: 9,
+    creator_id: 'creator_9',
+    title: 'Sample Video 9',
+    description: 'This is yet another sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/308/200',
+    video_loc: 'sample_video_9.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-09T00:00:00Z',
+    updated_at: '2023-01-09T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          900
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          90
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          9
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_9',
+    cat_id: 'category_9',
+    views: 900,
+    live_api_data: null,
+    video_duration: '01:30:00',
+    like_count: '90',
+    dislike_count: '9',
+  },
+  {
+    id: 10,
+    creator_id: 'creator_10',
+    title: 'Sample Video 10',
+    description: 'This is a sample video description.',
+    privacy: 'public',
+    thumbnail: 'https://picsum.photos/309/200',
+    video_loc: 'sample_video_10.mp4',
+    video_type: 'mp4',
+    created_at: '2023-01-10T00:00:00Z',
+    updated_at: '2023-01-10T00:00:00Z',
+    details: (
+      <div className='flex gap-5'>
+        <div className='flex flex-col items-center justify-center'>
+          1000
+          <EyeIcon size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          100
+          <ThumbsUp size={15} />
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          10
+          <ThumbsDown size={15} />
+        </div>
+      </div>
+    ),
+    playlist_id: 'playlist_10',
+    cat_id: 'category_10',
+    views: 1000,
+    live_api_data: null,
+    video_duration: '01:40:00',
+    like_count: '100',
+    dislike_count: '10',
+  },
+]
+
 export default function Creators() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -243,7 +596,10 @@ export default function Creators() {
     setIsLoading(true)
     const res = await get_video_list_f(url)
     setIsLoading(false)
-    if (!res.status) return
+    if (!res.status) {
+      setVideos(sampleData)
+      return
+    }
     console.log(res.data.data.data)
 
     setVideos(generateOrganizedData(res.data.data.data))
